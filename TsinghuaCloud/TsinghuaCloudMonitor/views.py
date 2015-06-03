@@ -172,7 +172,7 @@ def doSearch(request):
     
     return render_to_rsponse('TsinghuaCloudMonitor/monitor.html',{'service':service_1})  
     
-    
+'''
 def hoststatus(request):
     host=[]
     maxhost=HostStatus.objects.all().values('HostName').annotate(max=Max('LastCheck'))
@@ -191,6 +191,26 @@ def hoststatus(request):
             host.append(temp[i])
        
     return render(request,'TsinghuaCloudMonitor/hoststatus.html',{'host':host})
+    '''
+def hoststatus(request):
+    host = []
+    maxhost = HostStatus.objects.all().values('HostName').annotate(max=Max('LastCheck')).filter(HostName__in=Host.objects.all().values('HostName'))
+    for i in range(0, len(maxhost)):
+        hosttype = get_object_or_404(Host, HostName=maxhost[i].get('HostName'))
+        temp = HostStatus.objects.filter(HostName=maxhost[i].get('HostName'), LastCheck=maxhost[i].get('max'))
+        for i in range(0, len(temp)):
+            temp[i].HostType = hosttype.HostType
+            status = temp[i].PluginOutput
+            print status[0:5]
+            if status[0:6] != 'PINGOK':
+                temp[i].Status = 'DOWN'
+            else:
+                temp[i].Status = 'UP'
+            print temp[i].HostType
+            host.append(temp[i])
+
+    return render(request, 'TsinghuaCloudMonitor/hoststatus.html', {'host': host})
+
 
 def memory_physical(request):
     memoryuse_name=[]
