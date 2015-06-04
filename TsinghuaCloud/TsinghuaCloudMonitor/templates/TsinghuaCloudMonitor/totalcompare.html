@@ -212,7 +212,7 @@ table.gridtable td {
 action=function(){
     if(choice == 0){
     $.ajax({
-               url:'http://166.111.143.241:8080/memory_physical/',
+               url:'/memory_physical/',
                success: function(result){
                         if (result.length!=0){
                         var memory_used_all =0;
@@ -255,7 +255,7 @@ action=function(){
     };
     if (choice == 1){
     $.ajax({
-               url:'http://166.111.143.241:8080/memory_virtual/',
+               url:'/memory_virtual/',
                success: function(result){
                         if (result.length!=0){
                         var memory_used_all =0;
@@ -298,7 +298,7 @@ action=function(){
     };
      if (choice == 2){
     $.ajax({
-               url:'http://166.111.143.241:8080/memory_external/',
+               url:'/memory_external/',
                success: function(result){
                         console.info(result);
                         if (result.length!=0){
@@ -504,7 +504,7 @@ setMemory=function(memoryuse_name,memoryuse_used,memoryuse_total){
 cpu=function(){
     if(choice == 0){
     $.ajax({
-               url:'http://166.111.143.241:8080/cpu_physical/',
+               url:'/cpu_physical/',
                success: function(result){
                         if (result.length!=0){
  
@@ -548,7 +548,7 @@ cpu=function(){
     };
     if (choice== 1){
      $.ajax({
-               url:'http://166.111.143.241:8080/cpu_virtual/',
+               url:'/cpu_virtual/',
                success: function(result){
                         if (result.length!=0){
  
@@ -592,7 +592,7 @@ cpu=function(){
     };
      if (choice == 2){
      $.ajax({
-               url:'http://166.111.143.241:8080/cpu_external/',
+               url:'/cpu_external/',
                success: function(result){
                         if (result.length!=0){
  
@@ -773,7 +773,7 @@ setCpu=function(cpuuse_name,cpuuse_used,cpuuse_percentage,cpuuse_total){
 disk=function(){
     if(choice == 0){
     $.ajax({
-               url:'http://166.111.143.241:8080/disk_physical/',
+               url:'/disk_physical/',
                success: function(result){
                         if (result.length!=0){
                         var disk_used_all =0;
@@ -816,7 +816,7 @@ disk=function(){
     };
     if (choice == 1){
     $.ajax({
-               url:'http://166.111.143.241:8080/disk_virtual/',
+               url:'/disk_virtual/',
                success: function(result){
                         if (result.length!=0){
                         var disk_used_all =0;
@@ -859,7 +859,7 @@ disk=function(){
     };
      if (choice == 2){
     $.ajax({
-               url:'http://166.111.143.241:8080/disk_external/',
+               url:'/disk_external/',
                success: function(result){
                         if (result.length!=0){
                         var disk_used_all =0;
@@ -1059,7 +1059,7 @@ setDisk=function(diskuse_name,diskuse_used,diskuse_total){
 pro=function(){
     if(choice == 0){
     $.ajax({
-               url:'http://166.111.143.241:8080/pro_physical/',
+               url:'/pro_physical/',
                success: function(result){
                         if (result.length!=0){
  
@@ -1094,7 +1094,7 @@ pro=function(){
     };
     if (choice== 1){
      $.ajax({
-               url:'http://166.111.143.241:8080/pro_virtual/',
+               url:'/pro_virtual/',
                success: function(result){
                         if (result.length!=0){
  
@@ -1129,7 +1129,7 @@ pro=function(){
     };
      if (choice == 2){
        $.ajax({
-               url:'http://166.111.143.241:8080/pro_external/',
+               url:'/pro_external/',
                success: function(result){
                         if (result.length!=0){
  
@@ -1280,7 +1280,7 @@ setPro=function(prouse_name,prouse_used,prouse_total){         // 路径配置
 eth=function(){
     if(choice == 0){
     $.ajax({
-               url:'http://166.111.143.241:8080/eth_physical/',
+               url:'/eth_physical/',
                success: function(result){
                         if (result.length!=0){
 
@@ -1314,7 +1314,7 @@ eth=function(){
     };
     if (choice == 1){
      $.ajax({
-               url:'http://166.111.143.241:8080/eth_virtual/',
+               url:'/eth_virtual/',
                success: function(result){
                         if (result.length!=0){
 
@@ -1348,7 +1348,7 @@ eth=function(){
     };
      if (choice == 2){
     $.ajax({
-               url:'http://166.111.143.241:8080/eth_external/',
+               url:'/eth_external/',
                success: function(result){
                         if (result.length!=0){
 
