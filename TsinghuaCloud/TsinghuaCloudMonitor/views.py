@@ -144,7 +144,8 @@ def getinstances(request):
 		print "not get getinstances request!"
 
 def monitor(request):
-    maxservice=Service.objects.all().values('HostName','ServiceName').order_by('HostName').annotate(max=Max('LastCheck'))
+    maxservice=Service.objects.all().values('HostName','ServiceName').order_by('HostName').annotate(max=Max('LastCheck'))\
+        .filter(HostName__in=Host.objects.all().values('HostName'))
     service = []
     for k in range(0,len(maxservice)):
         hosttype = get_object_or_404(Host,HostName=maxservice[k].get('HostName'))        
