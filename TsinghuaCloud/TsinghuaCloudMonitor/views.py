@@ -158,8 +158,7 @@ def getinstances(request):
 
 def monitor(request):
     maxservice = Service.objects.all().values('HostName', 'ServiceName').order_by('HostName').annotate(
-        max=Max('LastCheck')) \
-        .filter(HostName__in=Host.objects.all().values('HostName'))
+        max=Max('LastCheck')).filter(HostName__in=Host.objects.all().values('HostName'))
     service = []
     for k in range(0, len(maxservice)):
         hosttype = get_object_or_404(Host, HostName=maxservice[k].get('HostName'))
@@ -1081,12 +1080,11 @@ def login(request):
             errors.append('Please Enter password')
     if account and password:
         user = User.objects.filter(username=account, password=password)
-    if user:
+    if user != None:
         return HttpResponseRedirect('/hoststatus')
-
     else:
         errors.append('invaild user')
-        return HttpResponseRedirect('/login')
+        return HttpResponseRedirect('/homepage')
 
     return render_to_response('TsinghuaCloudMonitor/login.html', {'errors': errors})
 
@@ -1150,9 +1148,8 @@ def start_input(request):
     return render_to_response('TsinghuaCloudMonitor/start_input.html', {'errors': errors})
 
 
-def alogout(request):
-    logout(request)
-    return HttpResponseRedirect('/index')
+def logout(request):
+    return HttpResponseRedirect('/homepage')
 
 
 def download_first(request):
