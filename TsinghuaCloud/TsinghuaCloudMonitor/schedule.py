@@ -136,8 +136,6 @@ def test():
         for k in range(len(sort[j]['IP'].split(';'))):
             ipgroup=sort[j]['IP'].split(';')
             namegroup= sort[j]['HostName'].split(';')
-            Alias = 'TsinghuaCloud_' + namegroup
-            print Alias
             sql2='select Server,count(Target_IP) as num from TsinghuaCloudMonitor_nagios group by Server'
             server_count = selectData(sql2)
             sort2=[]
@@ -147,7 +145,7 @@ def test():
 
             sql3= "insert into TsinghuaCloudMonitor_nagios(Server,Target_IP,Target_HostName)value('%s','%s','%s')" % (sort2[0]['Server'],ipgroup[k],namegroup[k])
             insertData(sql3)
-            sql4="insert into TsinghuaCloudMonitor_host(IP,HostName,Owner,Info,NagiosServer,HostType,Alias)value('%s','%s','TsinghuaCloud','UP','%s','external', '%s')" % (ipgroup[k],namegroup[k],sort2[0]['Server'], Alias)
+            sql4="insert into TsinghuaCloudMonitor_host(IP,HostName,Owner,Info,NagiosServer,HostType,Alias)value('%s','%s','TsinghuaCloud','UP','%s','external', '%s')" % (ipgroup[k],namegroup[k],sort2[0]['Server'], namegroup[k])
             insertData(sql4)
             ssh_cmd(host,port,username,passwd,cmd)
 # <<<<<<< HEAD
@@ -172,6 +170,6 @@ def test():
 
 while True:
     test()
-        time.sleep(2)
+    time.sleep(2)
  
    
