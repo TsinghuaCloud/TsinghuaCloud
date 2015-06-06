@@ -16,6 +16,7 @@ class Service(models.Model):
     PerformanceData = models.CharField(max_length=100)
     LastCheck = models.CharField(max_length=50)
     HostType = models.CharField(max_length=50)
+    Alias = models.CharField(max_length=50)
     
 class HostStatus(models.Model):
     HostName = models.CharField(max_length=50)
@@ -26,7 +27,6 @@ class HostStatus(models.Model):
     HostType = models.CharField(max_length=50)
     Status = models.CharField(max_length=50)
 
-
 class Host(models.Model):
     IP = models.CharField(max_length=50)
     HostName = models.CharField(max_length=50)
@@ -34,6 +34,7 @@ class Host(models.Model):
     Info = models.CharField(max_length=50)
     NagiosServer = models.CharField(max_length=50)
     HostType = models.CharField(max_length=50)
+    Alias = models.CharField(max_length=50)
 
 class Schedule(models.Model):
     IP = models.CharField(max_length=50)

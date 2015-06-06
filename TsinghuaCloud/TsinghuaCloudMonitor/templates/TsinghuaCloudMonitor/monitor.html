@@ -181,7 +181,7 @@ var csrftoken = getCookie('csrftoken');
 				<tbody>
                         {% for service in service %}
                         <tr>
-                        <td class='detail'><a href="{% url 'hostdetail' service.id%}">{{service.HostName}}</a></td>
+                        <td class='detail'><a href="{% url 'hostdetail' service.id%}">{{service.Alias}}</a></td>
                         <td>{{service.ServiceName}}</td>
                         <!-- <td>{{service.Status}}</td> -->
                         <td>{{service.LastCheck}}</td>

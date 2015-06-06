@@ -166,6 +166,8 @@ def monitor(request):
                                       ServiceName=maxservice[k].get('ServiceName'), LastCheck=maxservice[k].get('max'))
         for i in range(0, len(temp)):
             temp[i].HostType = hosttype.HostType
+            temp[i].Alias = hosttype.Alias
+
             service.append(temp[i])
 
     print service
@@ -221,6 +223,7 @@ def hoststatus(request):
         temp = HostStatus.objects.filter(HostName=maxhost[i].get('HostName'), LastCheck=maxhost[i].get('max'))
         for i in range(0, len(temp)):
             temp[i].HostType = hosttype.HostType
+            temp[i].Alias = hosttype.Alias
             status = temp[i].PluginOutput
             print status[0:5]
             if status[0:6] != 'PINGOK':
@@ -753,13 +756,13 @@ def totalcompare(request):
     for k in range(0, size):
         temp_first = Service.objects.all().filter(HostName=memoryuse[k].get('HostName'), ServiceName='MemoryUsage',
                                                   LastCheck=memoryuse[k].get('max'))
-
+        cur_host = Host.objects.all().filter(HostName=memoryuse[k].get('HostName'))
         if len(temp_first) > 1:
             temp = temp_first[0]
         else:
             temp = get_object_or_404(Service, HostName=memoryuse[k].get('HostName'), ServiceName='MemoryUsage',
                                      LastCheck=memoryuse[k].get('max'))
-        memoryuse_name.append(temp.HostName)
+        memoryuse_name.append(cur_host[0].Alias)
         if temp.PerformanceData == '':
             memoryuse_used.append(0)
             memoryuse_total.append(0)
@@ -786,7 +789,8 @@ def totalcompare(request):
     for k in range(0, size):
         temp = get_object_or_404(Service, HostName=cpuloaduse[k].get('HostName'), ServiceName='cpuload',
                                  LastCheck=cpuloaduse[k].get('max'))
-        cpuloaduse_name.append(temp.HostName)
+        cur_host = Host.objects.all().filter(HostName=cpuloaduse[k].get('HostName'))
+        cpuloaduse_name.append(cur_host[0].Alias)
         if temp.PerformanceData == '':
             cpuloaduse_used.append(0)
         else:
@@ -807,7 +811,8 @@ def totalcompare(request):
     for k in range(0, size):
         temp = get_object_or_404(Service, HostName=diskusage[k].get('HostName'), ServiceName='disk',
                                  LastCheck=diskusage[k].get('max'))
-        diskusage_name.append(temp.HostName)
+        cur_host = Host.objects.all().filter(HostName=diskusage[k].get('HostName'))
+        diskusage_name.append(cur_host[0].Alias)
         if temp.PerformanceData == '':
             diskusage_used.append(0)
             diskusage_total.append(0)
@@ -833,7 +838,8 @@ def totalcompare(request):
     for k in range(0, size):
         temp = get_object_or_404(Service, HostName=prousage[k].get('HostName'), ServiceName='total-procs',
                                  LastCheck=prousage[k].get('max'))
-        pro_name.append(temp.HostName)
+        cur_host = Host.objects.all().filter(HostName=prousage[k].get('HostName'))
+        pro_name.append(cur_host[0].Alias)
         if temp.PerformanceData == '':
             pro_used.append(0)
         else:
@@ -852,7 +858,8 @@ def totalcompare(request):
     for k in range(0, size):
         temp = get_object_or_404(Service, HostName=eth[k].get('HostName'), ServiceName='Traffic_eth0',
                                  LastCheck=eth[k].get('max'))
-        eth_name.append(temp.HostName)
+        cur_host = Host.objects.all().filter(HostName=eth[k].get('HostName'))
+        eth_name.append(cur_host[0].Alias)
         if temp.PerformanceData == '':
             eth_in.append(0)
             eth_out.append(0)

@@ -171,7 +171,7 @@ var csrftoken = getCookie('csrftoken');
                        {% for host in host %}
                        
                        <tr>
-                       <td class='detail'><a href="{% url 'hostdetailmore' host.id%}" style="color:white">{{host.HostName}}</a></td>
+                       <td class='detail'><a href="{% url 'hostdetailmore' host.id%}" style="color:white">{{host.Alias}}</a></td>
                        <td>{{host.HostType}}</td>
                        <td>{{host.Status}}</td>
                        <td>{{host.LastCheck}}</td>
